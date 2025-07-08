@@ -5,7 +5,7 @@ export default function Index() {
   return (
    <SafeAreaView>
       <FlatList
-      data={["a", "b", "c", "d"]}
+      data={["a", "b", "c", "d" , "h"]}
       renderItem={({ item }) => <Text>{item}</Text>}
       />
    </SafeAreaView>
