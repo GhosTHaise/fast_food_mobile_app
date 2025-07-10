@@ -1,9 +1,13 @@
+import { FlatList, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   return (
    <SafeAreaView>
-      
+      <FlatList
+      data={["a", "b", "c"]}
+      renderItem={({ item }) => <Text>{item}</Text>}
+      />
    </SafeAreaView>
   );
 }
