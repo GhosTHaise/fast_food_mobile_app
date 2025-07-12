@@ -1,22 +1,39 @@
 import { offers } from "@/constants";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { Fragment } from "react";
+import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   return (
-   <SafeAreaView>
+    <SafeAreaView>
       <FlatList
-      data={offers}
-      renderItem={({ item , index }) => {
-         return (
-          <View>
-            <Pressable className="bg-amber-600 my-3 h-48">
-                <Text>{item.title}</Text>
-            </Pressable>
-          </View>
-         )
-      }}
+        data={offers}
+        renderItem={({ item, index }) => {
+          return (
+            <View>
+              <Pressable className="offer-card" style={{ backgroundColor: item.color }}>
+                {
+                  ({ pressed }) => (
+                    <Fragment>
+                      <View className="h-full w-1/2">
+                        <Image
+                          src={item.image}
+                          className="size-full"
+                          resizeMode="contain"
+                        />
+                      </View>
+                      <View className="offer-card__info">
+                        <Text>
+                          {item.title}
+                        </Text>
+                      </View>
+                    </Fragment>
+                  )}
+              </Pressable>
+            </View>
+          )
+        }}
       />
-   </SafeAreaView>
+    </SafeAreaView>
   );
 }
