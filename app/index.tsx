@@ -17,7 +17,7 @@ export default function Index() {
                     <Fragment>
                       <View className="h-full w-1/2">
                         <Image
-                          src={item.image}
+                          source={item.image}
                           className="size-full"
                           resizeMode="contain"
                         />
