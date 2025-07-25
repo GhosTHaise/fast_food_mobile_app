@@ -12,9 +12,9 @@ export default function AuthLayout() {
       >
         <View
           className="w-full relative"
-          style={{ height : Dimensions.get("screen").height / 2.25}}
+          style={{ height: Dimensions.get("screen").height / 2.25 }}
         >
-          <ImageBackground 
+          <ImageBackground
             source={images.loginGraphic}
             className='size-full rounded-b-lg'
             resizeMode='stretch'
@@ -24,8 +24,8 @@ export default function AuthLayout() {
             className="self-center size-48 absolute -bottom-16 z-10"
           />
         </View>
+        <Slot />
       </ScrollView>
-      <Slot />
     </KeyboardAvoidingView>
   )
 }
