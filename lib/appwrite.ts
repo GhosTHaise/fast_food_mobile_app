@@ -1,11 +1,11 @@
 import { CreateUserParams, SignInParams } from "@/type";
-import { Account, Avatars, Client, Databases, ID } from "react-native-appwrite";
+import { Account, Avatars, Client, Databases, ID, Query } from "react-native-appwrite";
 
 export const appwriteConfig = {
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
     platform: "mg.ghost.foodordering",
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
-     databaseId: process.env.EXPO_PUBLIC_DATABASE_ID!,
+    databaseId: process.env.EXPO_PUBLIC_DATABASE_ID!,
     userCollectionId: "687fd003002b7431d68c"
 }
 
@@ -22,7 +22,7 @@ const avatars = new Avatars(client);
 export const SignIn = async ({ email, password }: SignInParams) => {
     try {
         const user = await account.createEmailPasswordSession(email, password);
-        if(!user) throw new Error("User not signed in");
+        if (!user) throw new Error("User not signed in");
 
         return user;
     } catch (error) {
@@ -34,9 +34,9 @@ export const createUser = async ({ email, password, name }: CreateUserParams) =>
     try {
         const newAccount = await account.create(ID.unique(), email, password, name);
 
-        if(!newAccount) throw new Error("Account not created");
+        if (!newAccount) throw new Error("Account not created");
 
-        await SignIn({email, password});
+        await SignIn({ email, password });
 
         const avatarUrl = avatars.getInitialsURL(name);
 
@@ -45,13 +45,33 @@ export const createUser = async ({ email, password, name }: CreateUserParams) =>
             appwriteConfig.userCollectionId,
             ID.unique(),
             {
-                accountId : newAccount.$id,
+                accountId: newAccount.$id,
                 email,
                 name,
-                avatar : avatarUrl
+                avatar: avatarUrl
             }
         )
     } catch (error) {
-         throw new Error(error as string);
+        throw new Error(error as string);
+    }
+}
+
+export const getCurrentUser = async () => {
+    try {
+        const currentAccount = await account.get();
+        if (!currentAccount) { throw Error };
+
+        const currentUser = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.userCollectionId,
+            [Query.equal("accountId", currentAccount.$id)]
+        )
+
+        if (!currentUser) { throw Error };
+   
+        return currentUser.documents[0];
+    } catch (error) {
+        console.log("🚀 ~ getCurrentUser ~ error:", error)
+        throw new Error(error as string);
     }
 }
