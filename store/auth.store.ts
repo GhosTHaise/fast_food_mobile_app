@@ -1,3 +1,4 @@
+import { getCurrentUser } from "@/lib/appwrite";
 import { User } from "@/type";
 import { create } from "zustand";
 
@@ -10,7 +11,7 @@ type AuthState = {
     setUser : (user : User | null) => void;
     setIsLoading : (value : boolean) => void;
 
-    fetchAuthenticatedUser : () => Promise<User | null>;
+    fetchAuthenticatedUser : () => Promise<void>;
 }
 
 const useAuthStore = create<AuthState>((set, get) => ({
@@ -24,9 +25,20 @@ const useAuthStore = create<AuthState>((set, get) => ({
 
     fetchAuthenticatedUser : async () => {
         set({ isLoading: true });
-        const user = await fetch("/api/user").then(res => res.json());
-        set({ isLoading: false, user });
-        return user;
+        try {
+            const user = await getCurrentUser();
+
+            if(user) {
+                set({ isAuthenticated: true, user : user as User });
+            }else{
+                set({ isAuthenticated: false, user : null });
+            }
+        } catch (error) {
+            console.log("fetchAuthenticatedUser error", error);
+            set({ isLoading: false, user : null });
+        }finally{
+            set({ isLoading: false });
+        }
     }
 }));
 
