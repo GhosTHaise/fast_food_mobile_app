@@ -1,3 +1,9 @@
+<div style="display : flex;">
+   <img width="270" height="723" alt="image" src="https://github.com/user-attachments/assets/f3e95eed-8a14-49e8-a083-c0cd1cddbfb6" />
+   <img width="210" height="567" alt="image" src="https://github.com/user-attachments/assets/304ad76d-b88a-462c-a8ba-6ed52207d4b2" />
+   <img width="211" height="459" alt="image" src="https://github.com/user-attachments/assets/fe18501f-94bc-49ba-944e-41d67787f5ad" />
+</div>
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
