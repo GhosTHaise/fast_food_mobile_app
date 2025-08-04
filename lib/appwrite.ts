@@ -1,5 +1,5 @@
 import { CreateUserParams, SignInParams } from "@/type";
-import { Account, Avatars, Client, Databases, ID, Query } from "react-native-appwrite";
+import { Account, Avatars, Client, Databases, ID, Query, Storage } from "react-native-appwrite";
 
 export const appwriteConfig = {
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
@@ -23,6 +23,7 @@ client.setEndpoint(appwriteConfig.endpoint)
 export const account = new Account(client);
 export const databases = new Databases(client);
 const avatars = new Avatars(client);
+export const storage = new Storage(client);
 
 export const SignIn = async ({ email, password }: SignInParams) => {
     try {
