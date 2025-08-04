@@ -1,12 +1,22 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "skipLibCheck": true,
     "paths": {
       "@/*": [
         "./*"
       ]
     }
+  },
+  "ts-node": {
+    "esm": true
   },
   "include": [
     "**/*.ts",
@@ -14,5 +24,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts"
-  ]
+, "lib/seed.ts"  ]
 }
