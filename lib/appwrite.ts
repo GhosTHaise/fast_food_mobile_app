@@ -6,7 +6,12 @@ export const appwriteConfig = {
     platform: "mg.ghost.foodordering",
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
     databaseId: process.env.EXPO_PUBLIC_DATABASE_ID!,
-    userCollectionId: "687fd003002b7431d68c"
+    bucketId : "6890ff8c001146f59383",
+    userCollectionId: "687fd003002b7431d68c",
+    categoryCollectionId: "6890fca800066c2394be",
+    menuCollectionId: "6890fd2100049d6a988e",
+    customizationCollectionId: "6890fe23000e32ac8500",
+    menuCustomizationCollectionId: "6890fec4002839f3661e",
 }
 
 export const client = new Client();
