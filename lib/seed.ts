@@ -63,7 +63,7 @@ async function uploadImageToStorage(imageUrl: string) {
 
     const fileObj = {
         name: imageUrl.split("/").pop() || `file-${Date.now()}.jpg`,
-        type: blob.type,
+        type: blob.type || "image/png",
         size: blob.size,
         uri: imageUrl,
     };
@@ -119,8 +119,6 @@ async function seed(): Promise<void> {
     const menuMap: Record<string, string> = {};
     for (const item of data.menu) {
         const uploadedImage = await uploadImageToStorage(item.image_url);
-        console.log("[X] ~ file ~ upload file", item.image_url);
-
 
         const doc = await databases.createDocument(
             appwriteConfig.databaseId,
@@ -148,7 +146,7 @@ async function seed(): Promise<void> {
                 ID.unique(),
                 {
                     menu: doc.$id,
-                    customizations: customizationMap[cusName],
+                    customization: customizationMap[cusName],
                 }
             );
         }
