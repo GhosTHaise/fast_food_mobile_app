@@ -84,7 +84,7 @@ async function seed(): Promise<void> {
     await clearAll(appwriteConfig.menuCollectionId);
     await clearAll(appwriteConfig.menuCustomizationCollectionId);
     await clearStorage();
-
+    console.log("🚀 ~ seed ~ cleared all");
     // 2. Create Categories
     const categoryMap: Record<string, string> = {};
     for (const cat of data.categories) {
@@ -96,6 +96,7 @@ async function seed(): Promise<void> {
         );
         categoryMap[cat.name] = doc.$id;
     }
+    console.log("[X] ~ seed ~ created categories");
 
     // 3. Create Customizations
     const customizationMap: Record<string, string> = {};
@@ -112,11 +113,14 @@ async function seed(): Promise<void> {
         );
         customizationMap[cus.name] = doc.$id;
     }
+    console.log("[X] ~ seed ~ created customizations");
 
     // 4. Create Menu Items
     const menuMap: Record<string, string> = {};
     for (const item of data.menu) {
         const uploadedImage = await uploadImageToStorage(item.image_url);
+        console.log("[X] ~ file ~ upload file", item.image_url);
+
 
         const doc = await databases.createDocument(
             appwriteConfig.databaseId,
@@ -149,6 +153,8 @@ async function seed(): Promise<void> {
             );
         }
     }
+    console.log("[X] ~ seed ~ created menu");
+
 
     console.log("✅ Seeding complete.");
 }
