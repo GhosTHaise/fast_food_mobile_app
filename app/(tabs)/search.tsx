@@ -1,4 +1,4 @@
-import CartButton from "@/components/card-button";
+import CartButton from "@/components/cart-button";
 import MenuCard from "@/components/menu-card";
 import { getCategories, getMenu } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";

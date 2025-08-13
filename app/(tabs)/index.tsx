@@ -1,4 +1,4 @@
-import CardButton from "@/components/card-button";
+import CardButton from "@/components/cart-button";
 import { images, offers } from "@/constants";
 import * as Sentry from "@sentry/react-native";
 import cn from "clsx";
